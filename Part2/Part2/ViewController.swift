@@ -25,34 +25,32 @@ class ViewController: UIViewController {
         let number1 = Float(textField1.text!) ?? 0
         let number2 = Float(textField2.text!) ?? 0
         
-        var answer: Float? = nil
+        let answerText: String?
         
         //選択した記号で処理を分岐
         switch symbolSegmentedControl.selectedSegmentIndex {
         // + の場合
         case 0:
-            answer = number1 + number2
+            answerText = String(number1 + number2)
         // - の場合
         case 1:
-            answer = number1 - number2
+            answerText = String(number1 - number2)
         // * の場合
         case 2:
-            answer = number1 * number2
+            answerText = String(number1 * number2)
         // / の場合
         case 3:
-            if number2 != 0 {
-                answer = number1 / number2
+            if number2 == 0 {
+                answerText = "割る数を0以外にしてください。"
+            } else {
+                answerText = String(number1 / number2)
             }
         default:
-            print("エラー")
+            return
         }
 
         //結果をラベルに表示
-        if answer == nil {
-            answerLabel.text = "割る数を0以外にしてください。"
-        } else {
-            answerLabel.text = String(answer!)
-        }
+        answerLabel.text = answerText
     }
 }
 
